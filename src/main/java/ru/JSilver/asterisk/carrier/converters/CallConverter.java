@@ -50,7 +50,7 @@ public class CallConverter {
         return dto;
     }
 
-    public CallEntity updateEntity (CallEntity entity, CallQueueDto dto) {
+    public CallEntity updateEntity(CallEntity entity, CallQueueDto dto) {
         entity.setCallId(dto.getCallId());
         entity.setNumber(dto.getNumber());
         entity.setDate(dto.getDate());
