@@ -1,6 +1,7 @@
 package ru.JSilver.asterisk.carrier.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.JSilver.asterisk.carrier.integrations.CallQueueDto;
 
@@ -10,14 +11,17 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CompareService {
 
     private final DatabaseService dbService;
 
-    public void compareLists(List<CallQueueDto> PBXList, List<CallQueueDto> dbList, String queue) {
+    public void compareLists(List<CallQueueDto> PBXList, List<CallQueueDto> dbList) {
         List<CallQueueDto> diff = PBXList.stream()
-                .filter(item -> !dbList.contains(item))
+                .filter((CallQueueDto item) -> !dbList.contains(item))
                 .collect(Collectors.toList());
+
+        log.info("Difference: " + diff.size());
 
         if (!diff.isEmpty()) {
             List<CallQueueDto> updateList = new ArrayList<>();
@@ -31,8 +35,11 @@ public class CompareService {
                 }
             }
 
+            log.info("Update list: " + updateList.size());
+            log.info("Insert List: " + insertList.size());
+
             updateDB(updateList);
-            insertIntoDB(insertList, queue);
+            insertIntoDB(insertList);
         }
     }
 
@@ -42,9 +49,9 @@ public class CompareService {
         }
     }
 
-    private void insertIntoDB(List<CallQueueDto> list, String queue) {
+    private void insertIntoDB(List<CallQueueDto> list) {
         if (!list.isEmpty()) {
-            dbService.insertEntities(list, queue);
+            dbService.insertEntities(list);
         }
     }
 

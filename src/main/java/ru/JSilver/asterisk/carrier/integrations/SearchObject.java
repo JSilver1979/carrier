@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class SearchObject {
-    private String dateFrom;
-    private String dateTo;
-    private String group;
+    private String date;
+//    private String dateTo;
+//    private String group;
 }

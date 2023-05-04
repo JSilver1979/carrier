@@ -21,9 +21,9 @@ public class DatabaseService {
     private final CallConverter converter;
 
     @Transactional
-    public void insertEntities (List<CallQueueDto> dtoList, String queue) {
+    public void insertEntities (List<CallQueueDto> dtoList) {
         List<CallEntity> entityList = dtoList.stream()
-                .map(item -> converter.convertToEntity(item, queue))
+                .map(item -> converter.convertToEntity(item))
                 .collect(Collectors.toList());
 
         repository.saveAll(entityList);
@@ -37,9 +37,9 @@ public class DatabaseService {
         repository.saveAll(entityList);
     }
 
-    public List<CallQueueDto> getCallsList(LocalDate date, String queue) {
+    public List<CallQueueDto> getCallsList(LocalDate date) {
 
-        return repository.findAllByDateAndQueueNumber(date, queue)
+        return repository.findAllByDate(date)
                 .stream()
                 .map(converter::convertToDto)
                 .collect(Collectors.toList());

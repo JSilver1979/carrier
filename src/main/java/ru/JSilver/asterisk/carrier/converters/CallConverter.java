@@ -9,7 +9,7 @@ import ru.JSilver.asterisk.carrier.integrations.CallQueueDto;
 @RequiredArgsConstructor
 public class CallConverter {
 
-    public CallEntity convertToEntity(CallQueueDto item, String queueNumber) {
+    public CallEntity convertToEntity(CallQueueDto item) {
         return new CallEntity(
                 item.getCallId(),
                 item.getNumber(),
@@ -26,7 +26,7 @@ public class CallConverter {
                 item.isRedirected(),
                 false,
                 "",
-                queueNumber
+                item.getQueue()
         );
     }
 
@@ -46,6 +46,7 @@ public class CallConverter {
         dto.setQueueStatus(entity.getQueueStatus());
         dto.setAudioPath(entity.getAudioPath());
         dto.setRedirected(entity.isRedirected());
+        dto.setQueue(entity.getQueueNumber());
 
         return dto;
     }
@@ -64,6 +65,7 @@ public class CallConverter {
         entity.setQueueStatus(dto.getQueueStatus());
         entity.setAudioPath(dto.getAudioPath());
         entity.setRedirected(dto.isRedirected());
+        entity.setQueueNumber(dto.getQueue());
 
         return entity;
     }

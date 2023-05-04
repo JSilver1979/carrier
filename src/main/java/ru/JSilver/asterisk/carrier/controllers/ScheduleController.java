@@ -15,6 +15,8 @@ public class ScheduleController {
 
     @Scheduled(fixedRate = 20000)
     public void show() {
-        service.show();
+//        service.show();
+//        service.getQueuesList();
+        service.getCalls();
     }
 }

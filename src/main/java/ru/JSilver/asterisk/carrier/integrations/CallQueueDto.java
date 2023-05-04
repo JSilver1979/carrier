@@ -21,5 +21,6 @@ public class CallQueueDto {
     private String callStatus;
     private String queueStatus;
     private String audioPath;
+    private String queue;
     private boolean isRedirected;
 }

@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 @ConditionalOnProperty(name = "scheduler.enabled", matchIfMissing = true)
-@EnableConfigurationProperties(ReportServiceProperties.class)
+@EnableConfigurationProperties({ReportServiceProperties.class})
 @RequiredArgsConstructor
 @EnableScheduling
 public class ScheduleConfig {

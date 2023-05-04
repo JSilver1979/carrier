@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface CallRepository extends JpaRepository<CallEntity, Long> {
 
-    List<CallEntity> findAllByDateAndQueueNumber(LocalDate date, String queue);
+    List<CallEntity> findAllByDate(LocalDate date);
 
     CallEntity findByCallIdAndDate(String callId, LocalDate date);
 }
