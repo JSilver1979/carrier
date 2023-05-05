@@ -28,7 +28,7 @@ public class CompareService {
             List<CallQueueDto> insertList = new ArrayList<>();
 
             for (CallQueueDto dto : diff) {
-                if (containsCallId(dbList, dto.getCallId())) {
+                if (dtoInDatabase(dbList, dto)) {
                     updateList.add(dto);
                 } else {
                     insertList.add(dto);
@@ -55,9 +55,12 @@ public class CompareService {
         }
     }
 
-    private boolean containsCallId(List<CallQueueDto> list, String callId) {
-        return list.stream()
-                .map(CallQueueDto::getCallId)
-                .anyMatch(callId::equals);
+    private boolean dtoInDatabase(List<CallQueueDto> list, CallQueueDto dto) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getCallId().equals(dto.getCallId()) && list.get(i).getQueue().equals(dto.getQueue())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
