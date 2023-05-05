@@ -56,8 +56,8 @@ public class CompareService {
     }
 
     private boolean dtoInDatabase(List<CallQueueDto> list, CallQueueDto dto) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getCallId().equals(dto.getCallId()) && list.get(i).getQueue().equals(dto.getQueue())) {
+        for (CallQueueDto callQueueDto : list) {
+            if (callQueueDto.getCallId().equals(dto.getCallId()) && callQueueDto.getQueue().equals(dto.getQueue())) {
                 return true;
             }
         }
