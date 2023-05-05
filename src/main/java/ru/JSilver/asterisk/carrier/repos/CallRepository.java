@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface CallRepository extends JpaRepository<CallEntity, Long> {
+public interface CallRepository extends JpaRepository<CallEntity, Integer> {
 
     List<CallEntity> findAllByDate(LocalDate date);
 
