@@ -5,11 +5,13 @@ import org.springframework.stereotype.Component;
 import ru.JSilver.asterisk.carrier.data.CallEntity;
 import ru.JSilver.asterisk.carrier.integrations.CallQueueDto;
 
+import java.util.Map;
+
 @Component
 @RequiredArgsConstructor
 public class CallConverter {
 
-    public CallEntity convertToEntity(CallQueueDto item) {
+    public CallEntity convertToEntity(CallQueueDto item, Map<String, Integer> queueMap) {
         return new CallEntity(
                 item.getCallId(),
                 item.getNumber(),
@@ -26,8 +28,19 @@ public class CallConverter {
                 item.isRedirected(),
                 false,
                 "",
-                item.getQueue()
+                item.getQueue(),
+                setDelay(item.getQueue(), queueMap)
         );
+    }
+
+    private Integer setDelay(String queue, Map<String, Integer> queueMap) {
+        Integer delay = queueMap.entrySet()
+                .stream()
+                .filter(entry -> entry.getKey().equals(queue))
+                .findFirst()
+                .map(Map.Entry::getValue)
+                .orElse(0);
+        return delay;
     }
 
     public CallQueueDto convertToDto(CallEntity entity) {

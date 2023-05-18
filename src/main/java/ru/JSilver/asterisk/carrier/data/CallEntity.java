@@ -2,12 +2,14 @@ package ru.JSilver.asterisk.carrier.data;
 
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
 @Table(name = "calls")
+@NoArgsConstructor
 public class CallEntity {
 
     @Id
@@ -63,10 +65,10 @@ public class CallEntity {
     @Column(name = "queue_number")
     private String queueNumber;
 
-    public CallEntity() {
-    }
+    @Column(name = "delay")
+    private Integer delay;
 
-    public CallEntity(String callId, String number, LocalDate date, LocalTime callTime, LocalTime queueTime, LocalTime waitTime, String agentNumber, LocalTime answerTime, LocalTime answerDuration, String callStatus, String queueStatus, String audioPath, boolean isRedirected, boolean isRecalled, String comment, String queueNumber) {
+    public CallEntity(String callId, String number, LocalDate date, LocalTime callTime, LocalTime queueTime, LocalTime waitTime, String agentNumber, LocalTime answerTime, LocalTime answerDuration, String callStatus, String queueStatus, String audioPath, boolean isRedirected, boolean isRecalled, String comment, String queueNumber, Integer delay) {
         this.callId = callId;
         this.number = number;
         this.date = date;
@@ -83,6 +85,7 @@ public class CallEntity {
         this.isRecalled = isRecalled;
         this.comment = comment;
         this.queueNumber = queueNumber;
+        this.delay = delay;
     }
 
     public Integer getId() {
@@ -219,5 +222,13 @@ public class CallEntity {
 
     public void setQueueNumber(String queueNumber) {
         this.queueNumber = queueNumber;
+    }
+
+    public Integer getDelay() {
+        return delay;
+    }
+
+    public void setDelay(Integer delay) {
+        this.delay = delay;
     }
 }
