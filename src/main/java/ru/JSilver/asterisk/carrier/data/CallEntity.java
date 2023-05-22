@@ -1,9 +1,10 @@
 package ru.JSilver.asterisk.carrier.data;
 
 
-import jakarta.persistence.*;
+
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

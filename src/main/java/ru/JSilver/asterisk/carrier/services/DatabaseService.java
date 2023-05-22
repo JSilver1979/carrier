@@ -1,21 +1,19 @@
 package ru.JSilver.asterisk.carrier.services;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.JSilver.asterisk.carrier.converters.CallConverter;
 import ru.JSilver.asterisk.carrier.data.CallEntity;
 import ru.JSilver.asterisk.carrier.integrations.CallQueueDto;
 import ru.JSilver.asterisk.carrier.repos.CallRepository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class DatabaseService {
 
@@ -28,7 +26,6 @@ public class DatabaseService {
     @Transactional
     public void insertEntities (List<CallQueueDto> dtoList) {
         Map<String, Integer> queueMap = queueService.getQueueMap();
-        log.info("Map: " + queueMap);
         List<CallEntity> entityList = dtoList.stream()
                 .map(item -> converter.convertToEntity(item, queueMap))
                 .collect(Collectors.toList());

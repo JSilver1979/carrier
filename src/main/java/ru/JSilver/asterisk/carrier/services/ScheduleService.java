@@ -20,8 +20,8 @@ public class ScheduleService {
     private final CompareService compareService;
     private final DatabaseService dbService;
 
-    public void getCalls(int day) {
-        LocalDate searchDate = LocalDate.of(2023, 4, day);
+    public void getCalls(LocalDate searchDate) {
+//        LocalDate searchDate = LocalDate.of(2023, 4, day);day
         SearchObject so = new SearchObject(searchDate.toString());
         List<CallQueueDto> PBXList = integration.getList(so);
         log.info("PBX Calls: " + PBXList.size());
