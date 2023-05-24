@@ -36,7 +36,9 @@ public class DatabaseService {
     @Transactional
     public void updateEntities (List<CallQueueDto> dtoList) {
         List<CallEntity> entityList = dtoList.stream()
-                .map(item -> converter.updateEntity(repository.findByCallIdAndDate(item.getCallId(), item.getDate()),item))
+                .map(item -> converter.updateEntity(
+                        repository.findByCallIdAndDateAndQueueNumber(item.getCallId(), item.getDate(), item.getQueue()),
+                        item))
                 .collect(Collectors.toList());
         repository.saveAll(entityList);
     }

@@ -12,5 +12,5 @@ public interface CallRepository extends JpaRepository<CallEntity, Integer> {
 
     List<CallEntity> findAllByDate(LocalDate date);
 
-    CallEntity findByCallIdAndDate(String callId, LocalDate date);
+    CallEntity findByCallIdAndDateAndQueueNumber(String callId, LocalDate date, String queueNumber);
 }

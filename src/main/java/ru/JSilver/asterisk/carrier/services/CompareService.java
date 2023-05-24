@@ -5,8 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.JSilver.asterisk.carrier.integrations.CallQueueDto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +35,11 @@ public class CompareService {
             }
 
             log.info("Update list: " + updateList.size());
+            if (!updateList.isEmpty()) {
+                for (int i = 0; i < updateList.size(); i++) {
+                    log.info("Updated item: " + updateList.get(i).getCallId() + "; " + updateList.get(i).getQueueTime() + "; " + updateList.get(i).getQueue());
+                }
+            }
             log.info("Insert List: " + insertList.size());
 
             updateDB(updateList);
