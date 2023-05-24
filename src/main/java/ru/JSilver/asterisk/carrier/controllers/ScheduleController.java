@@ -23,7 +23,7 @@ public class ScheduleController {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 60000)
     public void show() {
 
 //        log.info("Date: " + startDate);
